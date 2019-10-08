@@ -32,6 +32,7 @@
         	<th scope="col" class="rounded-company">Date</th>
             <th scope="col" class="rounded-q1">Course</th>
             <th scope="col" class="rounded-q2">Time</th>
+            <th scope="col" class="rounded-q3">Marks</th>
             <th scope="col" class="rounded-q3">Status</th>
             <th scope="col" class="rounded-q4">Action</th>
         </tr>
@@ -40,7 +41,10 @@
     <tbody>
         
         <%
-            ArrayList list=pDAO.getAllResultsFromExams(Integer.parseInt(session.getAttribute("userId").toString()));
+        //Displaying all results of the user who is logged in.
+        	int uId = Integer.parseInt(session.getAttribute("userId").toString());
+           // ArrayList list=pDAO.getAllResultsFromExams(Integer.parseInt(session.getAttribute("userId").toString()));
+            ArrayList list=pDAO.getAllResultsFromExams(uId);
             for(int i=0;i<list.size();i++){
                 Exams e=(Exams)list.get(i);
             %>
@@ -48,6 +52,7 @@
             <td><%=e.getDate() %></td>
             <td><%=e.getcName() %></td>
             <td><%=e.getStartTime()+" - "+e.getEndTime()%></td>
+            <td><%=e.getObtMarks() %></td>
             <% if(e.getStatus()!=null){
                 if(e.getStatus().equals("Pass")){%>
                 <td style="background: #00cc33;color:white"><%=e.getStatus()%></td>
@@ -99,3 +104,5 @@
             }
             %>
                             </div>
+                            </div>
+                           

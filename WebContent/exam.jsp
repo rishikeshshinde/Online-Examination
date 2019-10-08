@@ -72,6 +72,7 @@ if(sec==0){
                        ArrayList<Questions> list=pDAO.getQuestions(request.getParameter("coursename"),20);
                        Questions question;
                        %>
+                       
                        <input type="hidden" name="size" value="<%=list.size()%>">
                        <input type="hidden" name="totalmarks" value="<%=pDAO.getTotalMarksByName(request.getParameter("coursename"))%>">
                        
@@ -84,7 +85,8 @@ if(sec==0){
 						<div class="question" >
 						<label class="question-label"><%=i+1 %></label>
 						<%=question.getQuestion() %>
-                                                </div>
+                        </div>
+                        
 						<div class="answer">
 							<input type="radio" id="c1<%=i%>" name="ans<%=i%>" value="<%=question.getOpt1()%>"/>
 							<label for="c1<%=i%>"><%=question.getOpt1()%></label>
@@ -101,7 +103,7 @@ if(sec==0){
                        <input type="hidden" name="qid<%=i%>" value="<%=question.getQuestionId()%>">
                        
                        
-                       
+       
                        <%
                        }
                        
@@ -129,7 +131,7 @@ if(sec==0){
                <span class="tag">End Time</span><span class="val"><%=result.getEndTime() %></span><br/>
                <span class="tag">Course Name</span><span class="val"><%=result.getcName() %></span><br/>
                <span class="tag">Obt Marks</span><span class="val"><%=result.getObtMarks() %></span><br/>
-               <span class="tag">Total Marks</span><span class="val"><%=result.gettMarks() %></span><br/>
+               <span class="tag">Total Marks</span><span class="val"><%=100 %></span><br/>
                <span class="tag">Result</span><span class="val"><%=result.getStatus() %></span></h2>
            </div>
            <p></p>
@@ -156,6 +158,8 @@ if(sec==0){
         <% 
             ArrayList list1=pDAO.getAllCourses();
             
+       
+        
             for(int i=0;i<list1.size();i=i+2){
         %>
         <option value="<%=list1.get(i)%>"><%=list1.get(i)%></option>

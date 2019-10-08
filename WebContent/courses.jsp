@@ -14,6 +14,7 @@
 						<a class="active" href="adm-page.jsp?pgprt=2"><h2>Courses</h2></a>
                                                 <a href="adm-page.jsp?pgprt=3"><h2>Questions</h2></a>
 						<a href="adm-page.jsp?pgprt=1"><h2>Accounts</h2></a>
+						<a href="adm-page.jsp?pgprt=5"><h2>Result Analysis</h2></a>
 					</div>
 				</div>
 			</div>

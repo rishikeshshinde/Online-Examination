@@ -4,12 +4,14 @@ package myPackage.classes;
 
 public class User {
    private int userId;
-   private String firstName,lastName,userName,email,password,type,contact,city,address;
+   private String firstName,lastName,userName,email,password,type,dept,roll_no,div;
 
    public User(){
        
    }
-    public User(int userId, String firstName, String lastName, String userName, String email, String password, String type, String contact, String city, String address) {
+   
+    public User(int userId, String firstName, String lastName, String userName, String email, String password, String type, String dept, String roll_no, String div) 
+    {
         this.userId = userId;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -17,9 +19,9 @@ public class User {
         this.email = email;
         this.password = password;
         this.type = type;
-        this.contact = contact;
-        this.city = city;
-        this.address = address;
+        this.dept = dept;
+        this.roll_no = roll_no;
+        this.div = div;
     }
 
     public int getUserId() {
@@ -78,28 +80,28 @@ public class User {
         this.type = type;
     }
 
-    public String getContact() {
-        return contact;
+    public String getDept() {
+        return dept;
     }
 
-    public void setContact(String contact) {
-        this.contact = contact;
+    public void setDept(String dept) {
+        this.dept = dept;
     }
 
-    public String getCity() {
-        return city;
+    public String getroll() {
+        return roll_no;
     }
 
-    public void setCity(String city) {
-        this.city = city;
+    public void setroll(String roll_no) {
+        this.roll_no = roll_no;
     }
 
-    public String getAddress() {
-        return address;
+    public String getdiv() {
+        return div;
     }
 
-    public void setAddress(String address) {
-        this.address = address;
+    public void setdiv(String div) {
+        this.div = div;
     }
 
    

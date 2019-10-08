@@ -1,45 +1,27 @@
 <!DOCTYPE html>
-<html>
-<head>
-	<title></title>
-	<link rel="stylesheet" type="text/css" href="style.css">
-</head>
-<body style="background-image: url(a.jpg);">
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <link rel="stylesheet" href="login-style.css">
+  </head>
+  <body>
+    <form method='post' action="controller.jsp">
+         <input type="hidden" name="page" value="login"> 
+        
+<div class="login-box">
+  <h1>Login</h1>
+  <div class="textbox">
+    <i class="fas fa-user"></i>
+    <input type="text" placeholder="Username" name ="username">
+  </div>
 
-	<div style="text-align : center">
-		<div class="central-div">
-		
-		<!-- sending login info to controller using hidden form field and validating in controller.jsp file -->
-		
-			<form method='post' action="controller.jsp">
-                             <input type="hidden" name="page" value="login"> 
-				<table>
-					<tr>
-						<td colspan="2">
-							<div style="text-align : center"><h2>Login Form</h2></div>
-						</td>
-					</tr>
-					<tr>
-						<td>
-							<label>User Name</label>
-						</td>
-						<td>
-                            <input type="text" class="text" placeholder="User Name" name="username">
-						</td>
-					</tr>
-					<tr>
-						<td>
-							<label>Password</label>
-						</td>
-						<td>
-                             <input type="password" class="text" placeholder="Password" name="password">
-						</td>
-					</tr>
-					<tr>
-						<td>
-							
-						</td>
-						<td>
+  <div class="textbox">
+    <i class="fas fa-lock"></i>
+    <input type="password" placeholder="Password" name="password">
+  </div>
+
+  
                                                     <% 
                                                     
                                                     //userStaus is set to -1 in controller.jsp 
@@ -56,22 +38,9 @@
                                                       }
                                                         }
                                                           %>
-                                                    
-                                                    
-                                            <!-- <a href="">Forgot Passowrd</a>	 --></td>
-					</tr>
-					<tr>
-						<td>
-						</td>
-						<td>
-								<div style="text-align : center">
-							<input type="submit" value="Login" class="button">
-							</div>
-						</td>
-					</tr>
-				</table>
-			</form>
-		</div>
-	</div>
-</body>
+
+  <input type="submit" class="btn" value="Login">
+</div>
+  </body>
+</form>
 </html>

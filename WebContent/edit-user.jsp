@@ -1,4 +1,5 @@
 <%@page import="myPackage.classes.User"%>
+<%! User user; %>
 <div class="central-div" style="top:10%">
                     <form action="controller.jsp">
                         <input type="hidden" name="page" value="profile"> 
@@ -48,26 +49,26 @@
 					</tr>
                                         <tr>
 						<td>
-							<label>Contact No</label>
+							<label>Roll No</label>
 						</td>
 						<td>
-                                                    <input type="text" name="contactno" value="<%=user.getContact() %>" class="text" placeholder="Contact No">
-						</td>
-					</tr>
-                                        <tr>
-						<td>
-							<label>City</label>
-						</td>
-						<td>
-                                                    <input type="text" name="city" value="<%=user.getCity() %>" class="text" placeholder="City">
+                                                    <input type="text" name="rollno" value="<%=user.getroll() %>" class="text" placeholder="Roll No">
 						</td>
 					</tr>
                                         <tr>
 						<td>
-							<label>Address</label>
+							<label>Department</label>
 						</td>
 						<td>
-                                                    <input type="text" name="address" value="<%=user.getAddress() %>" class="text" placeholder="Address">
+                                                    <input type="text" name="dept" value="<%=user.getDept() %>" class="text" placeholder="Comp">
+						</td>
+					</tr>
+                                        <tr>
+						<td>
+							<label>Division</label>
+						</td>
+						<td>
+                                                    <input type="text" name="div" value="<%=user.getdiv() %>" class="text" placeholder="TE10">
 						</td>
 					</tr>
 					<tr>

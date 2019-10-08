@@ -26,13 +26,13 @@ if(pDAO.loginValidate(request.getParameter("username").toString(), request.getPa
         String uName=request.getParameter("uname");
         String email=request.getParameter("email");
         String pass=request.getParameter("pass");
-        String contactNo =request.getParameter("contactno"); 
-        String city =request.getParameter("city");
-         String address =request.getParameter("address");
+        String rollNo =request.getParameter("rollno"); 
+        String dept =request.getParameter("dept");
+         String div =request.getParameter("div");
     
          
-    int str = pDAO.addNewStudent(fName,lName,uName,email,pass,contactNo,city,address);
-    
+    int str = pDAO.addNewStudent(fName,lName,uName,email,pass,dept,rollNo,div);
+    System.out.println("Str value :"+str);
     if(str==1)
     {
     	request.getSession().setAttribute("newUser","1");
@@ -55,14 +55,14 @@ if(pDAO.loginValidate(request.getParameter("username").toString(), request.getPa
         String uName=request.getParameter("uname");
         String email=request.getParameter("email");
         String pass=request.getParameter("pass");
-        String contactNo =request.getParameter("contactno");
-        String city =request.getParameter("city");
-        String address =request.getParameter("address");
+        String rollNo =request.getParameter("rollno");
+        String dept =request.getParameter("dept");
+        String div =request.getParameter("div");
          String uType =request.getParameter("utype");
         int uid=Integer.parseInt(session.getAttribute("userId").toString());
     
          
-    pDAO.updateStudent(uid,fName,lName,uName,email,pass,contactNo,city,address,uType);
+    pDAO.updateStudent(uid,fName,lName,uName,email,pass,rollNo,dept,div,uType);
     response.sendRedirect("dashboard.jsp");
 }else if(request.getParameter("page").toString().equals("courses")){
     if(request.getParameter("operation").toString().equals("addnew")){
@@ -79,30 +79,40 @@ if(pDAO.loginValidate(request.getParameter("username").toString(), request.getPa
         response.sendRedirect("adm-page.jsp?pgprt=1");
     }
 }else if(request.getParameter("page").toString().equals("questions")){
+	
     if(request.getParameter("operation").toString().equals("addnew")){
+    	
         pDAO.addQuestion(request.getParameter("coursename"),request.getParameter("question"),
                 request.getParameter("opt1"), request.getParameter("opt2"),request.getParameter("opt3"),
         request.getParameter("opt4"), request.getParameter("correct"));
+        
         response.sendRedirect("adm-page.jsp?pgprt=3");
+        
     }else if(request.getParameter("operation").toString().equals("del")){
         pDAO.delCourse(request.getParameter("cname").toString());
         response.sendRedirect("adm-page.jsp?pgprt=3");
+        
     }else if(request.getParameter("operation").toString().equals("delQuestion")){
         pDAO.delQuestion(Integer.parseInt(request.getParameter("qid")));
         response.sendRedirect("adm-page.jsp?pgprt=3");
         
     }
-}else if(request.getParameter("page").toString().equals("exams")){
-    if(request.getParameter("operation").toString().equals("startexam")){
+}else if(request.getParameter("page").toString().equals("exams"))
+{
+    if(request.getParameter("operation").toString().equals("startexam"))
+    {
         String cName=request.getParameter("coursename");
         int userId=Integer.parseInt(session.getAttribute("userId").toString());
        // System.out.println(userId);
+       //get the examId 
         int examId=pDAO.startExam(cName,userId);
         session.setAttribute("examId",examId);
         session.setAttribute("examStarted","1");
         response.sendRedirect("std-page.jsp?pgprt=1&coursename="+cName);
         
-    }else if(request.getParameter("operation").toString().equals("submitted")){
+    }
+ 	else if(request.getParameter("operation").toString().equals("submitted"))
+ 	{
         try{
         String time=LocalTime.now().toString();
         int size=Integer.parseInt(request.getParameter("size"));
@@ -110,7 +120,9 @@ if(pDAO.loginValidate(request.getParameter("username").toString(), request.getPa
         int tMarks=Integer.parseInt(request.getParameter("totalmarks"));
         session.removeAttribute("examId");
         session.removeAttribute("examStarted");
-        for(int i=0;i<size;i++){
+        
+        for(int i=0;i<size;i++)
+        {
             String question=request.getParameter("question"+i);
             String ans=request.getParameter("ans"+i);
             
@@ -122,16 +134,38 @@ if(pDAO.loginValidate(request.getParameter("username").toString(), request.getPa
         pDAO.calculateResult(eId,tMarks,time,size);
         
         response.sendRedirect("std-page.jsp?pgprt=1&eid="+eId+"&showresult=1");
-        }catch(Exception e){
+        }
+        catch(Exception e)
+        {
             e.printStackTrace();
         }
         
-        
     }
-}else if(request.getParameter("page").toString().equals("logout")){
+    
+}
+else if(request.getParameter("page").toString().equals("logout")){
     session.setAttribute("userStatus","0");
     session.removeAttribute("examId");
     session.removeAttribute("examStarted");
+   
     response.sendRedirect("index.jsp");
+}
+else if(request.getParameter("page").toString().equals("result_analysis"))
+{
+	if(request.getParameter("operation").toString().equals("search"))
+	{
+		String dname = request.getParameter("department_name");
+		String div_name = request.getParameter("division_name");
+		
+	ArrayList list = pDAO.getStudentsBySearch(dname, div_name);
+	
+	session.setAttribute("students",list);
+
+	response.sendRedirect("adm-page.jsp?pgprt=6");
+		//System.out.println(dname + div_name);
+		//response.sendRedirect("accounts.jsp");
+		
+	}
+
 }
 %>

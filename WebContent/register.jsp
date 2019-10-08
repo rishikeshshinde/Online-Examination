@@ -13,7 +13,7 @@
                         <input type="hidden" name="page" value="register">
       <% 
     //  request.getSession().setAttribute("newUser", "0");
-      
+      System.out.println(request.getSession().getAttribute("newUser"));
                                                         if(request.getSession().getAttribute("newUser")!=null){
                                                             System.out.println("registering...");
                                                       if(request.getSession().getAttribute("newUser").equals("5")){  
@@ -76,26 +76,26 @@
 					</tr>
                                         <tr>
 						<td>
-							<label>Contact No</label>
+							<label>Roll No</label>
 						</td>
 						<td>
-                                                    <input type="text" name="contactno" class="text" placeholder="Contact No" required>
-						</td>
-					</tr>
-                                        <tr>
-						<td>
-							<label>City</label>
-						</td>
-						<td>
-                                                    <input type="text" name="city" class="text" placeholder="City" required>
+                                                    <input type="text" name="rollno" class="text" placeholder="10927" required>
 						</td>
 					</tr>
                                         <tr>
 						<td>
-							<label>Address</label>
+							<label>Department</label>
 						</td>
 						<td>
-                                                    <input type="text" name="address" class="text" placeholder="Address" required>
+                                                    <input type="text" name="dept" class="text" placeholder="Comp" required>
+						</td>
+					</tr>
+                                        <tr>
+						<td>
+							<label>Division</label>
+						</td>
+						<td>
+                                                    <input type="text" name="div" class="text" placeholder="TE10" required>
 						</td>
 					</tr>
 					

@@ -56,6 +56,18 @@
             
             <%
             }
+            else if(request.getParameter("pgprt").equals("5")){
+            	%>
+            	
+            	<jsp:include page="result_analysis.jsp"></jsp:include>
+            		
+            <% 	
+            }
+            else if(request.getParameter("pgprt").equals("6")){
+            	%>
+           	<jsp:include page="search.jsp"></jsp:include> 	
+           <%
+            }
             %>
             
             <%

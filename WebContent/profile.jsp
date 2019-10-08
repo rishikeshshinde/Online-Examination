@@ -21,15 +21,13 @@
 						<a href="adm-page.jsp?pgprt=2"><h2>Courses</h2></a>
                                                 <a href="adm-page.jsp?pgprt=3"><h2>Questions</h2></a>
 						<a href="adm-page.jsp?pgprt=1"><h2>Accounts</h2></a>
+						<a href="adm-page.jsp?pgprt=5"><h2>Result Analysis</h2></a>
 					</div>
 				</div>
 			</div>
             <!-- CONTENT AREA -->
 			<div class="content-area">
                             <div class="panel" style="float: left;max-width: 600px">
-        
-                                
-        
             <%
            }else{
                %>
@@ -59,9 +57,9 @@
            <div class="profile ">
                <h2><span class="tag">Your Name</span><span class="val"><%=user.getFirstName()+" " %><%=user.getLastName() %></span><br/>
                <span class="tag">Email</span><span class="val"><%=user.getEmail() %></span><br/>
-               <span class="tag">Contact No</span><span class="val"><%=user.getContact() %></span><br/>
-               <span class="tag">City</span><span class="val"><%=user.getCity() %></span><br/>
-               <span class="tag">Address</span><span class="val"><%=user.getAddress() %></span></h2>
+               <span class="tag">Roll No</span><span class="val"><%=user.getroll() %></span><br/>
+               <span class="tag">Department</span><span class="val"><%=user.getDept() %></span><br/>
+               <span class="tag">Division</span><span class="val"><%=user.getdiv() %></span></h2>
            </div>
                <%
                if(user.getType().equals("admin")){
@@ -132,26 +130,26 @@
 					</tr>
                                         <tr>
 						<td>
-							<label>Contact No</label>
+							<label>Roll No</label>
 						</td>
 						<td>
-                                                    <input type="text" name="contactno" value="<%=user.getContact() %>" class="text" placeholder="Contact No">
-						</td>
-					</tr>
-                                        <tr>
-						<td>
-							<label>City</label>
-						</td>
-						<td>
-                                                    <input type="text" name="city" value="<%=user.getCity() %>" class="text" placeholder="City">
+                                                    <input type="text" name="rollno" value="<%=user.getroll() %>" class="text" placeholder="10927">
 						</td>
 					</tr>
                                         <tr>
 						<td>
-							<label>Address</label>
+							<label>Department</label>
 						</td>
 						<td>
-                                                    <input type="text" name="address" value="<%=user.getAddress() %>" class="text" placeholder="Address">
+                                                    <input type="text" name="dept" value="<%=user.getDept() %>" class="text" placeholder="Comp">
+						</td>
+					</tr>
+                                        <tr>
+						<td>
+							<label>Division</label>
+						</td>
+						<td>
+                                                    <input type="text" name="div" value="<%=user.getdiv() %>" class="text" placeholder="TE10">
 						</td>
 					</tr>
 					<tr>

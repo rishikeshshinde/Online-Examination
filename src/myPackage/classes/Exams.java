@@ -4,22 +4,22 @@ package myPackage.classes;
 
 public class Exams {
     
-    private int examId;
-    private String stdId,cName,tMarks,obtMarks,date,startTime,endTime,examTime,status;
+    private int examId,stdId;
+    private String cName,obtMarks,date,startTime,endTime,status;
 
     public Exams() {
     }
 
-    public Exams(int examId, String stdId,String cName, String tMarks, String obtMarks, String date, String startTime, String endTime, String examTime, String status) {
+    public Exams(int examId, int stdId,String cName,String obtMarks, String date, String startTime, String endTime, String status) {
         this.examId = examId;
         this.stdId = stdId;
         this.cName=cName;
-        this.tMarks = tMarks;
+        
         this.obtMarks = obtMarks;
         this.date = date;
         this.startTime = startTime;
         this.endTime = endTime;
-        this.examTime = examTime;
+        
         this.status = status;
     }
 
@@ -41,20 +41,12 @@ public class Exams {
         this.examId = examId;
     }
 
-    public String getStdId() {
+    public int getStdId() {
         return stdId;
     }
 
-    public void setStdId(String stdId) {
+    public void setStdId(int stdId) {
         this.stdId = stdId;
-    }
-
-    public String gettMarks() {
-        return tMarks;
-    }
-
-    public void settMarks(String tMarks) {
-        this.tMarks = tMarks;
     }
 
     public String getObtMarks() {
@@ -89,14 +81,7 @@ public class Exams {
         this.endTime = endTime;
     }
 
-    public String getExamTime() {
-        return examTime;
-    }
-
-    public void setExamTime(String examTime) {
-        this.examTime = examTime;
-    }
-
+   
     public String getStatus() {
         return status;
     }
