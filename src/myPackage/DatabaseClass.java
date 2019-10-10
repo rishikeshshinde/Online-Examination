@@ -380,6 +380,24 @@ public class DatabaseClass {
      }
      
      return marks;
+    }  
+    
+    public String getQuestion(int qid) throws SQLException
+    {
+    	String question = null;
+    	
+    	PreparedStatement pstm = conn.prepareStatement("Select question from questions where question_id = ?");
+    	pstm.setInt(1, qid);
+    	ResultSet rs = pstm.executeQuery();
+    	while(rs.next())
+    	{
+    		question = rs.getString(1);
+    	}
+    	
+    	pstm.close();
+    	
+		return question;
+    	
     }
     
     public ArrayList getAllQuestions(String courseName){
@@ -493,7 +511,7 @@ public class DatabaseClass {
             PreparedStatement pstm=conn.prepareStatement("insert into answers(exam_id,question,answer,correct_answer,status) "
                     + "Values(?,?,?,?,?)");
             pstm.setInt(1,eId);
-            pstm.setString(2, question);
+            pstm.setInt(2, qid);
             pstm.setString(3,ans);
             String correct=getCorrectAnswer(qid);
             pstm.setString(4, correct);
@@ -618,9 +636,25 @@ public class DatabaseClass {
          User user=null;
          PreparedStatement pstm;
          try {
+        	 if(dname.isEmpty())
+        	 {
+        		 pstm=conn.prepareStatement("Select * from users where Division=?");
+        		 pstm.setString(1, divname);
+        	 }
+        	 
+        	 else if (divname.isEmpty())
+        	 {
+        		 pstm=conn.prepareStatement("Select * from users where Department = ?");
+        		 pstm.setString(1,dname);
+        		 
+        	 }
+        	 else
+        	 {
              pstm = conn.prepareStatement("Select * from users where Department = ? and Division = ?");
              pstm.setString(1, dname);
              pstm.setString(2, divname);
+        	 }
+        	 
              ResultSet rs=pstm.executeQuery();
              while(rs.next()){
                  user =new User(rs.getInt(1),rs.getString(2),

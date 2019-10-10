@@ -2,6 +2,7 @@
 <%@page import="myPackage.classes.Exams"%>
 <%@page import="myPackage.classes.Questions"%>
 <%@page import="java.util.ArrayList"%>
+
 <jsp:useBean id="pDAO" class="myPackage.DatabaseClass" scope="page"/>
 
 <!-- SIDEBAR -->
@@ -131,7 +132,7 @@ if(sec==0){
                <span class="tag">End Time</span><span class="val"><%=result.getEndTime() %></span><br/>
                <span class="tag">Course Name</span><span class="val"><%=result.getcName() %></span><br/>
                <span class="tag">Obt Marks</span><span class="val"><%=result.getObtMarks() %></span><br/>
-               <span class="tag">Total Marks</span><span class="val"><%=100 %></span><br/>
+               <span class="tag">Total Marks</span><span class="val"><%= pDAO.getTotalMarksByName(result.getcName())%></span><br/>
                <span class="tag">Result</span><span class="val"><%=result.getStatus() %></span></h2>
            </div>
            <p></p>

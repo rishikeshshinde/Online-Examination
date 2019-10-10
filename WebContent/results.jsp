@@ -85,7 +85,12 @@
             
                 <tr>
                     <td rowspan="2"><%=i+1 %>)</td>
-                    <td colspan="2"><%=a.getQuestion()%></td>
+                    <% int qid=Integer.parseInt(a.getQuestion());
+                    
+                    String question = pDAO.getQuestion(qid);
+                    	
+                    %>
+                    <td colspan="2"><%=question%></td>
                     <td rowspan="2"><%=a.getStatus() %></td>
                 </tr>
                 <tr >

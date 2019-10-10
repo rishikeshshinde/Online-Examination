@@ -49,6 +49,8 @@
             <%
             }else if(request.getParameter("pgprt").equals("0")){
             	
+            	request.setAttribute("pedt","10");
+            	
             	//set profile.jsp as the default page when logged in
                 %>
             
@@ -68,8 +70,15 @@
            	<jsp:include page="search.jsp"></jsp:include> 	
            <%
             }
-            %>
             
+            else if(request.getParameter("pgprt").equals("7"))
+            {
+            %>
+            <jsp:include page="edit-user.jsp"></jsp:include>
+            
+            <%}
+            
+            %>
             <%
             }else response.sendRedirect("login.jsp");
             }else response.sendRedirect("login.jsp");

@@ -43,12 +43,12 @@
     <thead>
     	<tr>
         	<th scope="col">Name</th>
-            <th scope="col">Email</th>
+            <th scope="col">Roll No</th>
             <th scope="col">Username</th>
             <th scope="col">Password</th>
             <th scope="col">Department</th>
             <th scope="col">Division</th>
-            <th scope="col">Result</th>
+            <th scope="col">Exams Appeared</th>
             <th scope="col">Action</th>
             
         </tr>
@@ -65,7 +65,7 @@
    
     	<tr>
         	<td><%=user.getFirstName()+" "+user.getLastName() %></td>
-            <td><%=user.getEmail() %></td>
+            <td><%=user.getroll() %></td>
             <td><%=user.getUserName() %></td>
             <td><%=user.getPassword() %></td>
             <td><%=user.getDept() %></td>

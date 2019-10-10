@@ -32,7 +32,7 @@
 				<th scope="col">Name</th>
 				<th scope="col">Department</th>
 				<th scope="col">Division</th>
-				<th scope="col">Result</th>
+				<th scope="col">View Results</th>
 				</tr>
 				</thead>
 				<tbody>

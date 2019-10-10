@@ -12,7 +12,7 @@ image2.src="IMG/exam4.jpg";
 var image3=new Image();
 image3.src="IMG/exam1.png";
 var image4=new Image();
-image4.src="IMG/exam5.jpg";
+image4.src="IMG/exam5.jpg"; 
 var image5=new Image();
 image5.src="IMG/exam16.jpg";
 </script>

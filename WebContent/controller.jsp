@@ -157,6 +157,8 @@ else if(request.getParameter("page").toString().equals("result_analysis"))
 		String dname = request.getParameter("department_name");
 		String div_name = request.getParameter("division_name");
 		
+	
+		
 	ArrayList list = pDAO.getStudentsBySearch(dname, div_name);
 	
 	session.setAttribute("students",list);

@@ -40,12 +40,22 @@
                 
                 <%
                 
-            }else{
+            }else if(request.getParameter("pgprt").equals("0")){
+            	request.setAttribute("pedt", "5");
+            
                 %>
             
                 <jsp:include page="profile.jsp"/>
             
             <%
+            }
+            
+            else if(request.getParameter("pgprt").equals("7"))
+            {
+            	%>
+            	 <jsp:include page="edit-user.jsp"></jsp:include>
+            	
+            	<% 
             }
             %>
             

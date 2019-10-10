@@ -19,7 +19,7 @@
 					<div class="left-menu">
 						<a class="active" href="adm-page.jsp?pgprt=0"><h2>Profile</h2></a>
 						<a href="adm-page.jsp?pgprt=2"><h2>Courses</h2></a>
-                                                <a href="adm-page.jsp?pgprt=3"><h2>Questions</h2></a>
+                        <a href="adm-page.jsp?pgprt=3"><h2>Questions</h2></a>
 						<a href="adm-page.jsp?pgprt=1"><h2>Accounts</h2></a>
 						<a href="adm-page.jsp?pgprt=5"><h2>Result Analysis</h2></a>
 					</div>
@@ -30,6 +30,7 @@
                             <div class="panel" style="float: left;max-width: 600px">
             <%
            }else{
+        	  
                %>
                
                <!-- SIDEBAR -->
@@ -50,36 +51,55 @@
 			<div class="content-area">
                             <div class="panel" style="float: left;max-width: 600px">
                <%
+               String pedt= request.getAttribute("pedt").toString();
+               System.out.println("%%" + pedt);
            }
-           if(request.getParameter("pedt")==null){
+           if(request.getAttribute("pedt").toString().equals("10"))
+           {
            %>
            <div class="title">Profile</div>
            <div class="profile ">
                <h2><span class="tag">Your Name</span><span class="val"><%=user.getFirstName()+" " %><%=user.getLastName() %></span><br/>
                <span class="tag">Email</span><span class="val"><%=user.getEmail() %></span><br/>
-               <span class="tag">Roll No</span><span class="val"><%=user.getroll() %></span><br/>
                <span class="tag">Department</span><span class="val"><%=user.getDept() %></span><br/>
-               <span class="tag">Division</span><span class="val"><%=user.getdiv() %></span></h2>
-           </div>
-               <%
-               if(user.getType().equals("admin")){
-               %>
-               <br/>
-               <a href="adm-page.jsp?pgprt=0&pedt=1"><span class="add-btn">Edit Profile</span></a>
-               <% 
-               }else{
-               %><br/>
-               <a href="std-page.jsp?pgprt=0&pedt=1"><span class="add-btn">Edit Profile</span></a>
-               <% 
-               }
-               %>
-           
-           <%
-           }else{
-               %>
                
+               <%-- <span class="tag">Roll No</span><span class="val"><%=user.getroll() %></span><br/>
+               <span class="tag">Division</span><span class="val"><%=user.getdiv() %></span></h2> --%>
+               
+               
+           </div>
+               <br/>
+               <a href="adm-page.jsp?pgprt=7&edit=101"><span class="add-btn">Edit Profile</span></a>
+           <%
+           }
+           
+           else if(request.getAttribute("pedt").toString().equals("5"))
+        	   {
+        	   System.out.println( " ** " + request.getAttribute("pedt"));
+        	   %>
+        	   <div class="title">Profile</div>
+               <div class="profile ">
+                   <h2><span class="tag">Your Name</span><span class="val"><%=user.getFirstName()+" " %><%=user.getLastName() %></span><br/>
+                   <span class="tag">Email</span><span class="val"><%=user.getEmail() %></span><br/>
+                   <span class="tag">Department</span><span class="val"><%=user.getDept() %></span><br/>
+                   
+                  <span class="tag">Roll No</span><span class="val"><%=user.getroll() %></span><br/>
+                   <span class="tag">Division</span><span class="val"><%=user.getdiv() %></span></h2> 
+                   
+                   
+               </div>
+               
+               <br/>
+               <a href="std-page.jsp?pgprt=7&edit=51"><span class="add-btn">Edit Profile</span></a>
+        		<% 
+        	   }
+           %>
+          <!--  if(request.getParameter("pedt").toString().equals("50"))
+           {
+               %>
+                -->
                <!-- Start of Edit Form --->
-               <div class="title">Edit Profile</div>
+              <%--  <div class="title">Edit Profile</div>
                <div class="central-div form-style-6" style="position:inherit;margin-top: 70px;" >
                     <form action="controller.jsp">
                         <input type="hidden" name="page" value="profile"> 
@@ -169,7 +189,7 @@
                 
                <%
            }
-           %>
+           %> --%>
     
         </div>
     </div>
