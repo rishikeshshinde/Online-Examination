@@ -9,7 +9,7 @@
 </head>
 <body>
 	<div class="top-area">
-		<div style="text-align : center"><h2>Admin Panel</h2></div> <a href="controller.jsp?page=logout" class="button" style="float: right;background:crimson;color:white">Logout</a>
+		<div style="text-align : center"><h2>Admin Panel</h2></div> <a href="controller.jsp?page=logout" class="button" style="float: right;background:black;color:white;padding:3px">Logout</a>
 	</div>
 
             <%
@@ -77,6 +77,15 @@
             <jsp:include page="edit-user.jsp"></jsp:include>
             
             <%}
+            else if(request.getParameter("pgprt").equals("8")){
+                
+                %>
+            
+                <jsp:include page="results.jsp"/>
+                
+                <%
+                
+            }
             
             %>
             <%

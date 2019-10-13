@@ -21,7 +21,7 @@
             <!-- CONTENT AREA -->
 			<div class="content-area">
                             
-                            <div class="panel" style="max-width: 420px;float:right">
+                            <div class="panel" style="max-width: 420px;">
                                 <div class="title">
                                    All Courses
                                 </div>
@@ -48,7 +48,7 @@
         <td><%=list.get(i)%></td>
         <td><%=list.get(i+1)%></td>
         <td ><a  href="controller.jsp?page=courses&operation=del&cname=<%=list.get(i)%>" 
-                onclick="return confirm('Are you sure you want to delete this ?');" class="del">
+                onclick="return confirm('All the data related to course will be deleted.Are you sure you want to do this?');" class="del">
                 <div class="delete-btn" style="max-width: 40px;font-size: 17px; padding: 3px">X</div>
             </a></td>
     </tr>
@@ -57,7 +57,10 @@
             %>
             </table>
         </div>
-        <div  class="panel form-style-6" style="max-width: 450px" >
+        
+        <!-- <div style="float : right"><input type="submit" class="form-button" value="Add" name="submit"></div> -->
+   
+        <div  class="panel form-style-6" style="max-width: 450px" float:right" >
            <div class="title">
                                    Add New Course
                                 </div>

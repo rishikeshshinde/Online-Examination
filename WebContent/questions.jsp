@@ -21,7 +21,7 @@
 			</div>
             <!-- CONTENT AREA -->
             <div class="content-area" >
-                            <div class="panel form-style-6" style="min-width: 300px;max-width: 390px;float: left">
+     <div class="panel form-style-6" style="min-width: 300px;max-width: 390px;">
             <form action="adm-page.jsp">
                 <div class="title">Show All Questions for</div>
                 <br><br>
@@ -40,10 +40,10 @@
             </select>
             <input type="submit" value="Show" class="form-button">
             </form>
-                            </div>
-        
-        <div class="panel form-style-6" style="max-width: 420!important;float: right">     
-               <form action="controller.jsp" >
+      </div>
+        <br>
+        <div class="panel form-style-6" style="max-width: 400">     
+               <form action="photoprocess" enctype="multipart/form-data" method="post">
                    <div class="title">Add New Question</div>
                    <table >
                        <tr>
@@ -64,7 +64,11 @@
                        </tr>
                        <tr>
                            <td><label>Your Question:</label></td>
-                           <td colspan="4"><input type="text" name="question" class="text" placeholder="Type your question here" style="width: 420px;" ></td><br>
+                           <td colspan="4"><input type="text" name="question" class="text" placeholder="Type your question here" style="width: 420px;" >
+                           					<input type="file" name="photo" size = "50">
+                           					</td>
+                           				
+                           <br>
                        </tr>
                        <tr>
                            <td><label>Options</label></td>

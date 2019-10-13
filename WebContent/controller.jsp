@@ -2,6 +2,9 @@
 <%@page import="myPackage.*"%>
 <%@page import="java.util.*"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page import="javax.servlet.*" %>
+<%@page import="javax.servlet.http.*" %>
+
  <jsp:useBean id="pDAO" class="myPackage.DatabaseClass" scope="page"/>
  
 <%
@@ -80,15 +83,16 @@ if(pDAO.loginValidate(request.getParameter("username").toString(), request.getPa
     }
 }else if(request.getParameter("page").toString().equals("questions")){
 	
-    if(request.getParameter("operation").toString().equals("addnew")){
+    /* if(request.getParameter("operation").toString().equals("addnew")){
     	
+    	Part photo = request.getPart("photo");
         pDAO.addQuestion(request.getParameter("coursename"),request.getParameter("question"),
                 request.getParameter("opt1"), request.getParameter("opt2"),request.getParameter("opt3"),
-        request.getParameter("opt4"), request.getParameter("correct"));
+        request.getParameter("opt4"), request.getParameter("correct"),photo);
         
         response.sendRedirect("adm-page.jsp?pgprt=3");
         
-    }else if(request.getParameter("operation").toString().equals("del")){
+    } */ if(request.getParameter("operation").toString().equals("del")){
         pDAO.delCourse(request.getParameter("cname").toString());
         response.sendRedirect("adm-page.jsp?pgprt=3");
         

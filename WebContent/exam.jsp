@@ -80,12 +80,15 @@ if(sec==0){
                        <%
                        for(int i=0;i<list.size();i++){
                            question=list.get(i);
+                           if(question.getstatus().equals("y"))
+                           {
                        %>
                        <center>
 					<div class="question-panel">
 						<div class="question" >
 						<label class="question-label"><%=i+1 %></label>
 						<%=question.getQuestion() %>
+						
                         </div>
                         
 						<div class="answer">
@@ -107,7 +110,7 @@ if(sec==0){
        
                        <%
                        }
-                       
+                       }
                        %>
                        
                        

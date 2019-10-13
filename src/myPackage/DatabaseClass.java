@@ -1,6 +1,9 @@
 package myPackage;
 
 import java.sql.Connection;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.sql.*;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -14,12 +17,19 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
+import javax.servlet.http.Part;
 import javax.swing.JOptionPane;
+
+
+
 import myPackage.classes.Answers;
 import myPackage.classes.Courses;
 import myPackage.classes.Exams;
 import myPackage.classes.Questions;
 import myPackage.classes.User;
+
+
 
 public class DatabaseClass {
     private Connection conn;
@@ -29,7 +39,7 @@ public class DatabaseClass {
         establishConnection();
     }
     
-    //establishConnection function
+    //establishConnection function 
     private void establishConnection() throws ClassNotFoundException, SQLException {
        
             Class.forName("com.mysql.jdbc.Driver");
@@ -219,7 +229,7 @@ public class DatabaseClass {
     }
     public void delCourse(String cName){
         try {
-            String sql="DELETE from courses where course_name=?";
+            String sql="call deletecourse(?)";
             PreparedStatement pstm=conn.prepareStatement(sql);
             pstm.setString(1,cName);
             pstm.executeUpdate();
@@ -230,7 +240,21 @@ public class DatabaseClass {
     } 
     public void delQuestion(int qId){
         try {
-            String sql="DELETE from questions where question_id=?";
+        	//delqidfromans(qId);
+            String sql="Update questions set status = ? where question_id = ?";
+            PreparedStatement pstm=conn.prepareStatement(sql);
+            pstm.setString(1, "n");
+            pstm.setInt(2,qId);
+            pstm.executeUpdate();
+            pstm.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(DatabaseClass.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    public void delqidfromans(int qId){
+        try {
+            String sql="DELETE from answers where q_id=?";
             PreparedStatement pstm=conn.prepareStatement(sql);
             pstm.setInt(1,qId);
             pstm.executeUpdate();
@@ -239,6 +263,7 @@ public class DatabaseClass {
             Logger.getLogger(DatabaseClass.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+    
     public void delUser(int uid){
         try {
             String sql="DELETE from users where user_id=?";
@@ -251,11 +276,11 @@ public class DatabaseClass {
         }
     }
     public void addQuestion(String cName,String question,String opt1,String opt2,String opt3
-                                ,String opt4,String correct){
+                                ,String opt4,String correct,Part photo) throws IOException{
         
         try {
-            String sql="INSERT into questions( `question`, `opt1`, `opt2`, `opt3`, `opt4`, `correct`,course_name)"
-                    + " VALUES (?,?,?,?,?,?,?)";
+            String sql="INSERT into questions( `question`, `opt1`, `opt2`, `opt3`, `opt4`, `correct`,course_name,document,status)"
+                    + " VALUES (?,?,?,?,?,?,?,?,?)";
             PreparedStatement pstm=conn.prepareStatement(sql);
             pstm.setString(1,question);
             pstm.setString(2,opt1 );
@@ -264,6 +289,10 @@ public class DatabaseClass {
             pstm.setString(5,opt4 );
             pstm.setString(6,correct );
             pstm.setString(7,cName);
+            
+            //pstm.setString();
+            pstm.setBinaryStream(8, photo.getInputStream(),(int)photo.getSize());
+            pstm.setString(9,"y");
             pstm.executeUpdate();
             pstm.close();
         } catch (SQLException ex) {
@@ -271,19 +300,32 @@ public class DatabaseClass {
         }
     }
     public ArrayList<Questions> getQuestions(String courseName,int questions){
+    	Blob image = null;
+    	byte[ ] imgData = null ;
         ArrayList<Questions> list=new ArrayList<Questions>();
         try {
             
-            String sql="Select * from questions where course_name=? ORDER BY RAND() LIMIT ?";
+            String sql="Select * from questions where course_name=? and status=? ORDER BY RAND() LIMIT ?";
             PreparedStatement pstm=conn.prepareStatement(sql);
             pstm.setString(1,courseName);
-            pstm.setInt(2,questions);
+            pstm.setInt(3,questions);
+            pstm.setString(2, "y");
             ResultSet rs=pstm.executeQuery();
             Questions question;
             while(rs.next()){
+            	//image = rs.getBlob(9);
+            	//imgData = image.getBytes(1,(int)image.length());
+            	//response.setContentType("image/jpeg");
+            	image = rs.getBlob(9);
+            	imgData = image.getBytes(1, (int)image.length());
+            	System.out.print("imagedata" + imgData);
+            	//o.write(imgData);
+            	//o.flush();
+            	//o.close();
+
                question = new Questions(
                        rs.getInt(1),rs.getString(3),rs.getString(4),rs.getString(5),
-                       rs.getString(6),rs.getString(7),rs.getString(8),rs.getString(2)
+                       rs.getString(6),rs.getString(7),rs.getString(8),rs.getString(2),rs.getBlob(9),rs.getString(10)
                     ); 
                list.add(question);
             }
@@ -386,8 +428,9 @@ public class DatabaseClass {
     {
     	String question = null;
     	
-    	PreparedStatement pstm = conn.prepareStatement("Select question from questions where question_id = ?");
+    	PreparedStatement pstm = conn.prepareStatement("Select question from questions where question_id = ? ");
     	pstm.setInt(1, qid);
+    
     	ResultSet rs = pstm.executeQuery();
     	while(rs.next())
     	{
@@ -401,18 +444,24 @@ public class DatabaseClass {
     }
     
     public ArrayList getAllQuestions(String courseName){
+    	Blob image = null;
+    	byte[ ] imgData = null ;
         ArrayList list=new ArrayList();
         try {
             
-            String sql="Select * from questions where course_name=?";
+            String sql="Select * from questions where course_name=? and status=?";
             PreparedStatement pstm=conn.prepareStatement(sql);
             pstm.setString(1,courseName);
+            pstm.setString(2, "y");
             ResultSet rs=pstm.executeQuery();
             Questions question;
             while(rs.next()){
+            	image = rs.getBlob(9);
+            	imgData = image.getBytes(1, (int)image.length());
+            	System.out.print("imagedata" + imgData);
                question = new Questions(
                        rs.getInt(1),rs.getString(3),rs.getString(4),rs.getString(5),
-                       rs.getString(6),rs.getString(7),rs.getString(8),rs.getString(2)
+                       rs.getString(6),rs.getString(7),rs.getString(8),rs.getString(2),rs.getBlob(9),rs.getString(10)
                     ); 
                list.add(question);
             }
@@ -508,7 +557,7 @@ public class DatabaseClass {
     }
    public void insertAnswer(int eId,int qid,String question,String ans){
         try {
-            PreparedStatement pstm=conn.prepareStatement("insert into answers(exam_id,question,answer,correct_answer,status) "
+            PreparedStatement pstm=conn.prepareStatement("insert into answers(exam_id,q_id,answer,correct_answer,status) "
                     + "Values(?,?,?,?,?)");
             pstm.setInt(1,eId);
             pstm.setInt(2, qid);

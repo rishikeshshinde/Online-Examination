@@ -10,7 +10,7 @@ public class User {
        
    }
    
-    public User(int userId, String firstName, String lastName, String userName, String email, String password, String type, String dept, String roll_no, String div) 
+    public User(int userId, String firstName, String lastName, String userName, String password, String email, String type, String dept, String roll_no, String div) 
     {
         this.userId = userId;
         this.firstName = firstName;

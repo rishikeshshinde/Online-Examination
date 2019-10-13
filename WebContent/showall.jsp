@@ -16,18 +16,21 @@
 						<a href="adm-page.jsp?pgprt=2"><h2>Courses</h2></a>
                         <a class="active" href="adm-page.jsp?pgprt=3"><h2>Questions</h2></a>
 						<a href="adm-page.jsp?pgprt=1"><h2>Accounts</h2></a>
+						<a href="adm-page.jsp?pgprt=5"><h2>Result Analysis</h2></a>
 					</div>
 				</div>
 			</div>
             <!-- CONTENT AREA -->
             <div class="content-area" >
-                <center>
+                <div style="text-align:center">
         <%
            if(request.getParameter("coursename")!=null){
                ArrayList list=pDAO.getAllQuestions(request.getParameter("coursename"));
+               
                for(int i=0;i<list.size();i++){
                    Questions question=(Questions)list.get(i);
-                   
+                   if(question.getstatus().equals("y"))
+                   {
                    %>
                    <div class="question-panel">
 						<div class="question" >
@@ -48,6 +51,8 @@
                    
                    <%
                }
+               }
           } %>
-       </center>
+          
+       </div>
             </div>

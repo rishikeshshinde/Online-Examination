@@ -1,15 +1,18 @@
 
 package myPackage.classes;
 
+import java.sql.Blob;
+
+import javax.servlet.http.Part;
 
 public class Questions {
     private int questionId;
-    private String question,opt1,opt2,opt3,opt4,correct,courseName;
-
+    private String question,opt1,opt2,opt3,opt4,correct,courseName,status;
+    private Blob photo;
     public Questions() {
     }
 
-    public Questions(int questionId, String question, String opt1, String opt2, String opt3, String opt4, String correct, String courseName) {
+    public Questions(int questionId, String question, String opt1, String opt2, String opt3, String opt4, String correct, String courseName,Blob photo,String status) {
         this.questionId = questionId;
         this.question = question;
         this.opt1 = opt1;
@@ -18,11 +21,14 @@ public class Questions {
         this.opt4 = opt4;
         this.correct = correct;
         this.courseName = courseName;
+        this.photo = photo;
+        this.status=status;
     }
 
     public int getQuestionId() {
         return questionId;
     }
+  
 
     public void setQuestionId(int questionId) {
         this.questionId = questionId;
@@ -82,6 +88,22 @@ public class Questions {
 
     public void setCourseName(String courseName) {
         this.courseName = courseName;
+    }
+    
+    public Blob getPhoto() {
+        return photo;
+    }
+    
+    public void setPhoto(Blob photo) {
+        this.photo = photo;
+    }
+
+    public String getstatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
     
     

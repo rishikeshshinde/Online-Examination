@@ -4,6 +4,14 @@
 <%@page import="java.util.ArrayList"%>
 <jsp:useBean id="pDAO" class="myPackage.DatabaseClass" scope="page"/>
 
+ <script src="node_modules/tablefilter/dist/tablefilter/tablefilter.js"></script>
+ 
+<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css"> -->
+          <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+           <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+
+ 
+ 
 <!-- SIDEBAR -->
 			<div class="sidebar" style="background-image: url(sidebar-1.jpg)">
 				<div class="sidebar-background" >
@@ -32,11 +40,11 @@
                                 <br>
                                 <br/>
                                 <%  request.getSession().setAttribute("newUser","0");%>
-                                <a href="register.jsp" class="button"><span class="add-btn" style="margin-left: 80px;">Add New Student</span></a>
+                                <a href="register.jsp" class="button"><span class="add-btn" style="margin-left: 80px;">Add New Student</span></a><br><br>
            <br>
+           <input class="form-control" style="width: 70%;float:right;height:30px;background-color: white;padding-left: 20px;padding-right: 20px;margin-right: 180px" id="myInput" type="text" placeholder="Search..">
            
-           
-                       <table id="one-column-emphasis" >
+                       <table id="one-column-emphasis"  >
     <colgroup>
     	<col class="oce-first" />
     </colgroup>
@@ -53,7 +61,7 @@
             
         </tr>
     </thead>
-    <tbody>
+    <tbody id="mytable">
            <%
               ArrayList list=pDAO.getAllUsers();
               User user;
@@ -143,7 +151,9 @@
             }else{%>
             <td style="background: bisque ;">Terminated</td>
             <% } %>
-            <td><a href="std-page.jsp?pgprt=2&eid=<%=e.getExamId()%>">Details</a></td>
+            
+            <%session.setAttribute("set", "2"); %>
+            <td><a href="adm-page.jsp?pgprt=8&eid=<%=e.getExamId()%>">Details</a></td>
         </tr>
        
        <% }
@@ -158,4 +168,17 @@
                         
                        </div>
                        </div>
+                        <script>
+$(document).ready(function(){
+  $("#myInput").on("keyup", function() {
+    var value = $(this).val().toLowerCase();
+    $("#mytable tr").filter(function() {
+      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+    });
+  });
+});
+</script>
+                      
+                       			
+                       
                       

@@ -5,6 +5,11 @@
 <%@page import="java.util.ArrayList"%>
 <jsp:useBean id="pDAO" class="myPackage.DatabaseClass" scope="page"/>
 <!-- SIDEBAR -->
+
+<% if(session.getAttribute("set").equals("1"))
+{
+	%>
+
 			<div class="sidebar" style="background-image: url(sidebar-1.jpg)">
 				<div class="sidebar-background" >
 					<h2 class="logo-text">
@@ -17,7 +22,36 @@
 					</div>
 				</div>
 		
+         
                        </div>
+                       <% 
+}
+
+else if(session.getAttribute("set").equals("2")){
+	%>
+	
+	<div class="sidebar" style="background-image: url(sidebar-1.jpg)">
+				<div class="sidebar-background" >
+					<h2 class="logo-text">
+						Online Examination System
+					</h2>
+
+					<div class="left-menu">
+						<a  href="adm-page.jsp?pgprt=0"><h2>Profile</h2></a>
+						<a href="adm-page.jsp?pgprt=2"><h2>Courses</h2></a>
+                                                <a href="adm-page.jsp?pgprt=3"><h2>Questions</h2></a>
+						<a class="active" href="adm-page.jsp?pgprt=1"><h2>Accounts</h2></a>
+						<a href="adm-page.jsp?pgprt=5"><h2>Result Analysis</h2></a>
+					</div>
+				</div>
+			</div>
+	
+	
+	
+	
+<%	
+}
+%>
                <!-- CONTENT AREA -->
 			<div class="content-area">
                             <div class="panel" style="float: left;max-width: 900px">

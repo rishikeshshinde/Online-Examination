@@ -3,6 +3,7 @@
 <head>
 	<title></title>
 	<link rel="stylesheet" type="text/css" href="style.css">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body>
 	<div style="text-align : center">
@@ -29,12 +30,19 @@
 				<table>
 					<tr>
 						<td colspan="2">
-							<center><h2>Register New User</h2></center>
+							<center><h2 class="user"><i class="fa fa-user-circle" aria-hidden="true"></i>
+							</h2></center>
+							<style type="text/css">
+							.user i
+							{
+								font-size: 80px;
+								padding: 20px;							}
+							</style>
 						</td>
 					</tr>
 					<tr>
 						<td>
-							<label>First Name</label>
+							<!-- <label>First Name</label> -->
 						</td>
 						<td>
                                                     <input type="text" name="fname" class="text" placeholder="First Name" required>
@@ -42,7 +50,7 @@
 					</tr>
 					<tr>
 						<td>
-							<label>Last Name</label>
+							<!-- <label>Last Name</label> -->
 						</td>
 						<td>
                                                     <input type="text"  name="lname" class="text" placeholder="Last Name" required>
@@ -51,7 +59,7 @@
 					
 					<tr>
 						<td>
-							<label>User Name</label>
+							<!-- <label>User Name</label> -->
 						</td>
 						<td>
                                                     <input type="text" name="uname" class="text" placeholder="User Name" required>
@@ -59,7 +67,7 @@
 					</tr>
 					<tr>
 						<td>
-							<label>Email</label>
+							<!-- <label>Email</label> -->
 						</td>
 						<td>
                                                     <input type="email" name="email" class="text" placeholder="Email" required>
@@ -68,7 +76,7 @@
 					
 					<tr>
 						<td>
-							<label>Password</label>
+							<!-- <label>Password</label> -->
 						</td>
 						<td>
                                                     <input type="password" name="pass" class="text" placeholder="Password" required>
@@ -76,15 +84,15 @@
 					</tr>
                                         <tr>
 						<td>
-							<label>Roll No</label>
+							<!-- <label>Roll No</label> -->
 						</td>
 						<td>
-                                                    <input type="text" name="rollno" class="text" placeholder="10927" required>
+                                                    <input type="text" name="rollno" class="text" placeholder="Roll no." required>
 						</td>
 					</tr>
                                         <tr>
 						<td>
-							<label>Department</label>
+							<!-- <label>Department</label> -->
 						</td>
 						<td>
                                                     <input type="text" name="dept" class="text" placeholder="Comp" required>
@@ -92,7 +100,7 @@
 					</tr>
                                         <tr>
 						<td>
-							<label>Division</label>
+							<!-- <label>Division</label> -->
 						</td>
 						<td>
                                                     <input type="text" name="div" class="text" placeholder="TE10" required>
@@ -105,7 +113,7 @@
 						<td>
 							<div style="text-align : center">
 							
-							<input type="submit" value="Register Now" class="button">
+							<br><input type="submit" value="Register Now" class="button">
 							</div>
 						</td>
 					</tr>
