@@ -1,6 +1,6 @@
 <html>
 <head>
-<title>my website</title>
+<title>Online Examination System</title>
 <link href="w1.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
@@ -31,16 +31,14 @@ slideit();
 </script>
 <div id="nav">
 <ul>
-<li><a href="index.jsp">Home</a></li>
 <li><a href="login.jsp">login</a></li>
-<li><a href="index.html">Contact Us</a></li>
 </ul>
 </div>
 <div id="d">
-<h2>Welcome to our Website</h2>
+<h2>Welcome</h2>
 <p></p>
 </div>
-<div id="img1">
+<!-- <div id="img1">
 <img src="IMG\book1.jpg" width="300" height="250" />
 <img src="IMG\book2.jpg" width="300" height="250" />
 <img src="IMG\book8.jpg" width="300" height="250" />
@@ -53,9 +51,7 @@ slideit();
 <img src="IMG\bookfive.jpg" width="300" height="250" />
 <img src="IMG\booksix.jpg" width="300" height="250" />
 <img src="IMG\bookseven.jpg" width="300" height="250" />
-</div>
-<div id="footer">
-Footer Area
-</div>
+</div>  -->
+
 </body>
 </html>

@@ -71,6 +71,7 @@ if(pDAO.loginValidate(request.getParameter("username").toString(), request.getPa
 else if(request.getParameter("page").toString().equals("course")){
     
    String cname =request.getParameter("cname");
+ 
     int tmarks =Integer.parseInt(request.getParameter("tmarks"));
     String time=request.getParameter("time");
 
@@ -80,8 +81,7 @@ else if(request.getParameter("page").toString().equals("course")){
 
 else if(request.getParameter("page").toString().equals("courses")){
     if(request.getParameter("operation").toString().equals("addnew")){
-        pDAO.addNewCourse(request.getParameter("coursename"),Integer.parseInt(request.getParameter("totalmarks")),
-                request.getParameter("time"));
+        pDAO.addNewCourse(request.getParameter("coursename"),request.getParameter("dname"),Integer.parseInt(request.getParameter("totalmarks")), request.getParameter("time"));
         response.sendRedirect("adm-page.jsp?pgprt=2");
     }else if(request.getParameter("operation").toString().equals("del")){
         pDAO.delCourse(request.getParameter("cname").toString());
@@ -194,10 +194,29 @@ else if(request.getParameter("page").toString().equals("result_analysis"))
 	ArrayList list = pDAO.getStudentsBySearch(dname, div_name);
 	
 	session.setAttribute("students",list);
-
-	response.sendRedirect("adm-page.jsp?pgprt=6");
+	
+	response.sendRedirect("adm-page.jsp?pgprt=6&search=1");
 		//System.out.println(dname + div_name);
 		//response.sendRedirect("accounts.jsp");
+		
+	}
+	else if(request.getParameter("operation").equals("search_course"))
+	{
+		String cname = request.getParameter("cname");
+		if(cname.isEmpty())
+		{
+			
+			response.sendRedirect("adm-page.jsp?pgprt=5");
+		}
+		else
+		{
+		String div = request.getParameter("div");
+		System.out.print("div"+ div);
+		ArrayList list = pDAO.getStdIdbyCourse(cname);
+		
+		session.setAttribute("stuIdlist",list);
+		response.sendRedirect("adm-page.jsp?pgprt=6&search=2&div="+div);
+		}
 		
 	}
 

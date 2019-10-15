@@ -1,3 +1,7 @@
+
+<%@page import="myPackage.classes.*" %>
+<%@page import="java.util.ArrayList"%>
+<jsp:useBean id="pDAO" class="myPackage.DatabaseClass" scope="page"/>
 <!DOCTYPE html>
 <html>
 <head>
@@ -89,23 +93,44 @@
 						<td>
                                                     <input type="text" name="rollno" class="text" placeholder="Roll no." required>
 						</td>
+						
 					</tr>
-                                        <tr>
+            <!--    <tr>
 						<td>
-							<!-- <label>Department</label> -->
+							<label>Department</label>
 						</td>
 						<td>
                                                     <input type="text" name="dept" class="text" placeholder="Comp" required>
 						</td>
-					</tr>
-                                        <tr>
+	        </tr> -->
+					
+					
+					 <tr>
+                           
+                           <td colspan="2"> 
+                               <select name="dept" class="text">
+        <% 
+            ArrayList list4=pDAO.getAllDepartments();
+            
+            for(int i=0;i<list4.size();i=i+1){
+            	Department dept = (Department)list4.get(i);
+        %>
+        <option value="<%=dept.getDname()%>"><%=dept.getDname()%></option>
+            <%
+            }
+            %>
+            </select>
+                           </td>
+                       </tr>
+                       
+                        <tr>
 						<td>
-							<!-- <label>Division</label> -->
+							
 						</td>
 						<td>
                                                     <input type="text" name="div" class="text" placeholder="TE10" required>
 						</td>
-					</tr>
+					</tr> 
 					
 					<tr>
 						<td>

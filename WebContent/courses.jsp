@@ -1,6 +1,7 @@
 
 <%@page import="java.util.ArrayList"%>
 <%@page import="myPackage.classes.Courses" %>
+<%@page import="myPackage.classes.*" %>
 <jsp:useBean id="pDAO" class="myPackage.DatabaseClass" scope="page"/>
 
 <!-- SIDEBAR -->
@@ -33,7 +34,7 @@
     <thead>
     	<tr>
         	<th scope="col">Courses</th>
-                
+        	<th scope="col">Department</th>
             <th scope="col">T.Marks</th>
             <th scope="col">Time</th>
            <!--  <th scope="col">Edit</th> -->
@@ -50,7 +51,7 @@
         %>
         <tr>
         <td><%=course.getcName()%></td>
-       
+        <td><%=course.getDept() %></td>
         <td><%=course.gettMarks()%></td>
         <td><%=course.getTime()%>
        <%--  <td><a href="adm-page.jsp?pgprt=9&cname=<%=course.getcName()%>">Edit</a></td> --%>
@@ -78,6 +79,23 @@
                        <tr>
                            <td><label>Course Name</label></td>
                            <td> <input type="text" name="coursename" class="text" placeholder="Course Name"  style="width: 230px;"></td>
+                       </tr>
+                       <tr>
+                           <td><label>Department</label></td>
+                           <td colspan="3"> 
+                               <select name="dname" class="text">
+        <% 
+            ArrayList list4=pDAO.getAllDepartments();
+            
+            for(int i=0;i<list4.size();i=i+1){
+            	Department dept = (Department)list4.get(i);
+        %>
+        <option value="<%=dept.getDname()%>"><%=dept.getDname()%></option>
+            <%
+            }
+            %>
+            </select>
+                           </td>
                        </tr>
                        <tr>
                            <td><label>Total Marks</label></td>

@@ -5,6 +5,7 @@
 
 <jsp:useBean id="pDAO" class="myPackage.DatabaseClass" scope="page"/>
 
+<%int uId = Integer.parseInt(session.getAttribute("userId").toString()); %>
 <!-- SIDEBAR -->
 			<div class="sidebar" style="background-image: url(sidebar-1.jpg)">
 				<div class="sidebar-background" >
@@ -70,7 +71,7 @@ if(sec==0){
                        
                        <%
                        //20 questions limit which will be fetched 
-                       ArrayList<Questions> list=pDAO.getQuestionsforExam(request.getParameter("coursename"),20);
+                       ArrayList<Questions> list=pDAO.getQuestionsforExam(request.getParameter("coursename"));
                        Questions question;
                        %>
                        
@@ -160,7 +161,8 @@ if(sec==0){
                 <!-- get the course-name and the hidden values in controller.jsp -->
                 <select name="coursename" class="text">
         <% 
-            ArrayList list1=pDAO.getAllCourses();
+        String dname = pDAO.getDeptById(uId);
+            ArrayList list1=pDAO.getAllCoursesByDeptName(dname);
             
             for(int i=0;i<list1.size();i=i+1){
             	Courses course =(Courses)list1.get(i);

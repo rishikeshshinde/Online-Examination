@@ -11,21 +11,33 @@ public class Courses {
    private String cName;
    private int tMarks;
    private String time;
+   private String dept;
 
-    public Courses(String cName, int tMarks, String time) {
+    public Courses(String cName, int tMarks, String time,String dept) {
         this.cName = cName;
         this.tMarks = tMarks;
         
         this.time = time;
+        this.dept=dept;
     }
+    
+    public Courses() {
+    }
+    
+    public String getDept() {
+		return dept;
+	}
 
-    public Courses(String cName, int tMarks) {
+	public void setDept(String dept) {
+		this.dept = dept;
+	}
+
+	public Courses(String cName, int tMarks) {
         this.cName = cName;
         this.tMarks = tMarks;
     }
 
-    public Courses() {
-    }
+   
 
     public String getcName() {
         return cName;

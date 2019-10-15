@@ -1,8 +1,9 @@
 body{
-background:hsla(14, 100%, 53%, 0.6);
+background:black;
+
 }
 #nav{
-width:384px;
+width:100px;
 background:#666;
 height:36px;
 margin:0 auto;

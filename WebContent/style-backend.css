@@ -210,7 +210,7 @@ box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.14);
 }
 .panel{
 position: relative;
-padding: 20px;
+padding: 40px;
 margin-top: 60px;
 margin-left: 10px;
 border-radius: 3px;
@@ -223,15 +223,63 @@ box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.14);
 	height: 40px;
 	padding-top:17px;
 	float: left;
-        padding-left: 15px;
-        padding-right: 15px;
+    padding-left: 15px;
+    padding-right: 15px;
 	font-size: 21px;
 	color: white;
 	border-radius: 4px;
 	margin-left:15px;
 	text-align: center;
-	margin-top: -45px;
+	margin-top: -60px;
     background:#202059;
+    box-shadow: 0 4px 20px 0px rgba(0, 0, 0, 0.14), 0 7px 10px -5px rgba(233, 0, 0, 0.4);
+}
+.pass{
+    position: relative;
+	height: 40px;
+	padding-top:17px;
+	float: left;
+    padding-left: 15px;
+    padding-right: 15px;
+	font-size: 21px;
+	color: white;
+	border-radius: 4px;
+	margin-left:15px;
+	text-align: center;
+	margin-top: -60px;
+    background:#00cc33;
+    box-shadow: 0 4px 20px 0px rgba(0, 0, 0, 0.14), 0 7px 10px -5px rgba(233, 0, 0, 0.4);
+}
+.fail{
+    position: relative;
+	height: 40px;
+	padding-top:17px;
+	float: left;
+    padding-left: 15px;
+    padding-right: 15px;
+	font-size: 21px;
+	color: white;
+	border-radius: 4px;
+	margin-left:15px;
+	text-align: center;
+	margin-top: -60px;
+    background:#ff3333;
+    box-shadow: 0 4px 20px 0px rgba(0, 0, 0, 0.14), 0 7px 10px -5px rgba(233, 0, 0, 0.4);
+}
+.term{
+    position: relative;
+	height: 40px;
+	padding-top:17px;
+	float: left;
+    padding-left: 15px;
+    padding-right: 15px;
+	font-size: 21px;
+	color: black;
+	border-radius: 4px;
+	margin-left:15px;
+	text-align: center;
+	margin-top: -60px;
+    background:bisque;
     box-shadow: 0 4px 20px 0px rgba(0, 0, 0, 0.14), 0 7px 10px -5px rgba(233, 0, 0, 0.4);
 }
 
@@ -294,7 +342,7 @@ box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.14);
     background: cadetblue;
     color: white;
     display: inline-block;border-bottom: 1px solid cadetblue;
-    
+
     min-width: 120px !important;
     
 }

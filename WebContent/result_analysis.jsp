@@ -30,7 +30,7 @@
 					</h2>
 
 					<div class="left-menu">
-						<a  href="adm-page.jsp?pgprt=0"><h2>Profile</h2></a>
+						<a  href="adm-page.jsp?pgprt=0"><h2>My Profile</h2></a>
 						<a href="adm-page.jsp?pgprt=2"><h2>Courses</h2></a>
                                                 <a href="adm-page.jsp?pgprt=3"><h2>Questions</h2></a>
 						<a href="adm-page.jsp?pgprt=1"><h2>Accounts</h2></a>
@@ -57,4 +57,51 @@
              <input type="hidden" name="operation" value="search"> 
      		 <input type="submit" value="Search" class="s_button">
      	</form>
+     			
+     	
+     	<form action="controller.jsp">
+     	
+     	 <div class="panel form-style-6">
+     		<table>
+     			<tr>
+     				<td><label>Course</label></td>
+     					 <td><input type="text" name="cname" class="text" placeholder="DBMS" style="width: 200px ; margin-left:10px" ></td>
+   					 <td><label  style="margin-left:150px">Division</label></td>
+   					     <td><input type="text" name="div" class="text" placeholder="TE10" style="width: 200px;margin-left:10px"></td>
+     			</tr>  
+     		</table>
+     		
+     		</div>
+     		<input type="hidden" name="page" value="result_analysis">
+             <input type="hidden" name="operation" value="search_course"> 
+     		 <input type="submit" value="Search" class="s_button">
+     	</form>
      	</div>
+     
+     	
+     	
+  	
+     	
+     	
+     	
+     	
+     	<!-- <div class="content-area">
+     	
+     	<form action="controller.jsp">
+     	
+     	 <div class="panel form-style-6">
+     		<table>
+     			<tr>
+     				<td><label>Course</label></td>
+     					 <td><input type="text" name="cname" class="text" placeholder="DBMS" style="width: 200px ; margin-left:10px" ></td>
+   					 <td><label  style="margin-left:150px">Division</label></td>
+   					     <td><input type="text" name="div" class="text" placeholder="TE10" style="width: 200px;margin-left:10px"></td>
+     			</tr>  
+     		</table>
+     		
+     		</div>
+     		<input type="hidden" name="page" value="result_analysis">
+             <input type="hidden" name="operation" value="search_course"> 
+     		 <input type="submit" value="Search" class="s_button">
+     	</form>
+     	</div> -->

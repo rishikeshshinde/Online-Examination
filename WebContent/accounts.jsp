@@ -20,7 +20,7 @@
 					</h2>
 
 					<div class="left-menu">
-						<a  href="adm-page.jsp?pgprt=0"><h2>Profile</h2></a>
+						<a  href="adm-page.jsp?pgprt=0"><h2>My Profile</h2></a>
 						<a href="adm-page.jsp?pgprt=2"><h2>Courses</h2></a>
                                                 <a href="adm-page.jsp?pgprt=3"><h2>Questions</h2></a>
 						<a class="active" href="adm-page.jsp?pgprt=1"><h2>Accounts</h2></a>

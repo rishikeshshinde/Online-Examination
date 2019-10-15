@@ -28,6 +28,7 @@ import myPackage.classes.Courses;
 import myPackage.classes.Exams;
 import myPackage.classes.Questions;
 import myPackage.classes.User;
+import myPackage.classes.Department;
 
 
 
@@ -101,6 +102,24 @@ public class DatabaseClass {
         return str;
     }
      
+     public String getDeptById(int id){
+         String dept=null;
+         PreparedStatement pstm;
+         try {
+             pstm = conn.prepareStatement("Select Department from users where user_id=?");
+             pstm.setInt(1,id);
+             
+             ResultSet rs=pstm.executeQuery();
+             while(rs.next()){
+                 dept= rs.getString(1);
+             }
+         } catch (SQLException ex) {
+             System.out.println(ex.getMessage());
+             
+         }
+         return dept;
+     }
+     
      public boolean loginValidate(String userName, String userPass) throws SQLException{
          //  boolean status=false;
        
@@ -153,7 +172,7 @@ public class DatabaseClass {
             pstm.setString(1, course_name);
             ResultSet rs=pstm.executeQuery();
             while(rs.next()){
-                course=new Courses(rs.getString(1),rs.getInt(2),rs.getString(3));
+                course=new Courses(rs.getString(1),rs.getInt(2),rs.getString(3),rs.getString(4));
             }
             pstm.close();
         } catch (SQLException ex) {
@@ -242,7 +261,7 @@ public class DatabaseClass {
             Courses course;
             while(rs.next()){
             	
-            	 course = new Courses(rs.getString(1),rs.getInt(2),rs.getString(3));
+            	 course = new Courses(rs.getString(1),rs.getInt(2),rs.getString(3),rs.getString(4));
                 list.add(course);
             }
             pstm.close();
@@ -252,13 +271,52 @@ public class DatabaseClass {
         return list;
     }
     
-    public void addNewCourse(String courseName,int tMarks,String time){
+    public ArrayList<Department> getAllDepartments(){
+        ArrayList<Department> list=new ArrayList<Department>();
         try {
-            String sql="INSERT into courses(course_name,total_marks,time) Values(?,?,?)";
+            String sql="SELECT * from department";
+            PreparedStatement pstm=conn.prepareStatement(sql);
+            ResultSet rs=pstm.executeQuery();
+            Department department;
+            while(rs.next()){
+            	
+            	 department = new Department(rs.getString(1));
+                list.add(department);
+            }
+            pstm.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(DatabaseClass.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return list;
+    }
+    public ArrayList<Courses> getAllCoursesByDeptName(String dept){
+        ArrayList<Courses> list=new ArrayList<Courses>();
+        try {
+            String sql="SELECT * from courses where dept=?";
+            PreparedStatement pstm=conn.prepareStatement(sql);
+            pstm.setString(1, dept);
+            ResultSet rs=pstm.executeQuery();
+            Courses course;
+            while(rs.next()){
+            	
+            	 course = new Courses(rs.getString(1),rs.getInt(2),rs.getString(3),rs.getString(4));
+                list.add(course);
+            }
+            pstm.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(DatabaseClass.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return list;
+    }
+    
+    public void addNewCourse(String courseName,String dept,int tMarks,String time){
+        try {
+            String sql="INSERT into courses(course_name,total_marks,time,dept) Values(?,?,?,?)";
             PreparedStatement pstm=conn.prepareStatement(sql);
             pstm.setString(1, courseName);
             pstm.setInt(2,tMarks);
             pstm.setString(3,time);
+            pstm.setString(4,dept);
             pstm.executeUpdate();
             pstm.close();
         } catch (SQLException ex) {
@@ -337,16 +395,16 @@ public class DatabaseClass {
             Logger.getLogger(DatabaseClass.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    public ArrayList<Questions> getQuestionsforExam(String courseName,int questions){
+    public ArrayList<Questions> getQuestionsforExam(String courseName){
     	Blob image = null;
     	byte[ ] imgData = null ;
         ArrayList<Questions> list=new ArrayList<Questions>();
         try {
             
-            String sql="Select * from questions where course_name=? and status=? ORDER BY RAND() LIMIT ?";
+            String sql="Select * from questions where course_name=? and status=? ORDER BY RAND()";
             PreparedStatement pstm=conn.prepareStatement(sql);
             pstm.setString(1,courseName);
-            pstm.setInt(3,questions);
+            
             pstm.setString(2, "y");
             ResultSet rs=pstm.executeQuery();
             Questions question;
@@ -594,29 +652,35 @@ public class DatabaseClass {
         }
     }
 
-    public int getRemainingTime(int examId){
+    public int getRemainingTime(int examId)
+    {
         int time=0;
         try {
             String cName;
             cName = getCourseName(examId);
-            String sql="Select exams.start_time,courses.time from exams,courses where exams.exam_id=? and exams.course_name =?";
+            String sql="Select exams.start_time,courses.time from exams,courses where exams.exam_id=? and exams.course_name =? and courses.course_name=?";
             PreparedStatement pstm=conn.prepareStatement(sql);
             pstm.setInt(1, examId);
             pstm.setString(2,cName);
+            pstm.setString(3, cName);
             ResultSet rs=pstm.executeQuery();
             
             while(rs.next()){
                 //totalTime-(Math.abs(currentTime-examStartTime))
                 //Duration.between(first,sec) returns difference between 2 dates or 2 times
+            	System.out.print("Fetched time :" +  rs.getString(2));
+            	System.out.print("Localtime" + LocalTime.now());
+            	
                time=Integer.parseInt(rs.getString(2))-(int)Math.abs((Duration.between(LocalTime.now(),LocalTime.parse(rs.getString(1))).getSeconds()/60));
             }
             pstm.close();
         } catch (SQLException ex) {
             Logger.getLogger(DatabaseClass.class.getName()).log(Level.SEVERE, null, ex);
         }
-        System.out.println("Time " + time);
+        System.out.println("**Time " + time);
         return time;
     }
+    
     public String getCourseName(int examId) throws SQLException
     {
     	String str = null;
@@ -791,6 +855,31 @@ public class DatabaseClass {
                  user =new User(rs.getInt(1),rs.getString(2),
                          rs.getString(3),rs.getString(4),rs.getString(5),rs.getString(6),rs.getString(7),rs.getString(8),rs.getString(9),rs.getString(10));
              list.add(user);
+             }
+         } catch (SQLException ex) {
+             System.out.println(ex.getMessage());
+             
+         }
+         return list;
+    }
+    
+    public ArrayList getStdIdbyCourse(String cname)
+    {
+    	 ArrayList list=new ArrayList();
+        
+         PreparedStatement pstm;
+         try {
+        		 pstm=conn.prepareStatement("Select exam_id,std_id,course_name,obt_marks,status from exams where course_name=?");
+        		 pstm.setString(1, cname);
+        	 
+             ResultSet rs=pstm.executeQuery();
+             while(rs.next()){
+            	 list.add(rs.getInt(1));
+                list.add(rs.getInt(2));
+                list.add(rs.getString(3));
+                list.add(rs.getInt(4));
+                list.add(rs.getString(5));
+             
              }
          } catch (SQLException ex) {
              System.out.println(ex.getMessage());
