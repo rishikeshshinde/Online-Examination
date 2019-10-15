@@ -15,7 +15,7 @@
 					<h2 class="logo-text">
 						Online Examination System
 					</h2>
-
+					
 					<div class="left-menu">
 						<a class="active" href="adm-page.jsp?pgprt=0"><h2>Profile</h2></a>
 						<a href="adm-page.jsp?pgprt=2"><h2>Courses</h2></a>
@@ -52,7 +52,7 @@
                             <div class="panel" style="float: left;max-width: 600px">
                <%
                String pedt= request.getAttribute("pedt").toString();
-               System.out.println("%%" + pedt);
+              // System.out.println("%%" + pedt);
            }
            if(request.getAttribute("pedt").toString().equals("10"))
            {

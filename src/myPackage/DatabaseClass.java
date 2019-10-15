@@ -143,6 +143,24 @@ public class DatabaseClass {
         }
          return userDetails;
      }
+     
+     public Courses getCoursebyName(String course_name){
+         Courses course = null;
+         
+         try {
+            String sql="SELECT * from courses where course_name=?";
+            PreparedStatement pstm=conn.prepareStatement(sql);
+            pstm.setString(1, course_name);
+            ResultSet rs=pstm.executeQuery();
+            while(rs.next()){
+                course=new Courses(rs.getString(1),rs.getInt(2),rs.getString(3));
+            }
+            pstm.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(DatabaseClass.class.getName()).log(Level.SEVERE, null, ex);
+        }
+         return course;
+     }
     
     public int addNewStudent(String fName,String lName,String uName,String email,String pass,
             String dept,String roll_no,String div){
@@ -172,6 +190,7 @@ public class DatabaseClass {
         
         return str;
     }
+    
     public void updateStudent(int uId,String fName,String lName,String uName,String email,String pass,
             String roll_no,String dept,String div,String userType){
         try {
@@ -196,16 +215,35 @@ public class DatabaseClass {
         }
     }
     
+    public void updateCourse(int total_marks,String time,String course_name ){
+        try {
+            String sql="Update courses"
+                    + " set total_marks= ?,time = ? where course_name = ?";
+            
+            PreparedStatement pstm=conn.prepareStatement(sql);
+           pstm.setString(3,course_name );
+            pstm.setInt(1,total_marks );
+            pstm.setString(2,time );
+           
+            pstm.executeUpdate();
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(DatabaseClass.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
    
-    public ArrayList getAllCourses(){
-        ArrayList<Comparable> list=new ArrayList();
+    public ArrayList<Courses> getAllCourses(){
+        ArrayList<Courses> list=new ArrayList<Courses>();
         try {
             String sql="SELECT * from courses";
             PreparedStatement pstm=conn.prepareStatement(sql);
             ResultSet rs=pstm.executeQuery();
+            Courses course;
             while(rs.next()){
-                list.add(rs.getString(1));
-                list.add(rs.getInt(2));
+            	
+            	 course = new Courses(rs.getString(1),rs.getInt(2),rs.getString(3));
+                list.add(course);
             }
             pstm.close();
         } catch (SQLException ex) {
@@ -299,7 +337,7 @@ public class DatabaseClass {
             Logger.getLogger(DatabaseClass.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    public ArrayList<Questions> getQuestions(String courseName,int questions){
+    public ArrayList<Questions> getQuestionsforExam(String courseName,int questions){
     	Blob image = null;
     	byte[ ] imgData = null ;
         ArrayList<Questions> list=new ArrayList<Questions>();
@@ -318,7 +356,7 @@ public class DatabaseClass {
             	//response.setContentType("image/jpeg");
             	image = rs.getBlob(9);
             	imgData = image.getBytes(1, (int)image.length());
-            	System.out.print("imagedata" + imgData);
+            	//System.out.print("imagedata" + imgData);
             	//o.write(imgData);
             	//o.flush();
             	//o.close();
@@ -428,9 +466,9 @@ public class DatabaseClass {
     {
     	String question = null;
     	
-    	PreparedStatement pstm = conn.prepareStatement("Select question from questions where question_id = ? ");
+    	PreparedStatement pstm = conn.prepareStatement("Select question from questions where question_id = ? and status = ? ");
     	pstm.setInt(1, qid);
-    
+    	pstm.setString(2, "y");
     	ResultSet rs = pstm.executeQuery();
     	while(rs.next())
     	{
@@ -470,6 +508,50 @@ public class DatabaseClass {
             Logger.getLogger(DatabaseClass.class.getName()).log(Level.SEVERE, null, ex);
         }
         return list;
+    }
+    
+    public ArrayList getBankQuestions(String courseName){
+    	Blob image = null;
+    	byte[ ] imgData = null ;
+        ArrayList list=new ArrayList();
+        try {
+            
+            String sql="Select * from questions where course_name=?";
+            PreparedStatement pstm=conn.prepareStatement(sql);
+            pstm.setString(1,courseName);
+            
+            ResultSet rs=pstm.executeQuery();
+            Questions question;
+            while(rs.next()){
+            	image = rs.getBlob(9);
+            	imgData = image.getBytes(1, (int)image.length());
+            	System.out.print("imagedata" + imgData);
+               question = new Questions(
+                       rs.getInt(1),rs.getString(3),rs.getString(4),rs.getString(5),
+                       rs.getString(6),rs.getString(7),rs.getString(8),rs.getString(2),rs.getBlob(9),rs.getString(10)
+                    ); 
+               list.add(question);
+            }
+            pstm.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(DatabaseClass.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return list;
+    }
+    
+    public void updateStatus(int qid)
+    {
+    	 try {
+         	//delqidfromans(qId);
+             String sql="Update questions set status = ? where question_id = ?";
+             PreparedStatement pstm=conn.prepareStatement(sql);
+             pstm.setString(1, "y");
+             pstm.setInt(2,qid);
+             pstm.executeUpdate();
+             pstm.close();
+         } catch (SQLException ex) {
+             Logger.getLogger(DatabaseClass.class.getName()).log(Level.SEVERE, null, ex);
+         }
     }
     
     public ArrayList getAllAnswersByExamId(int examId){

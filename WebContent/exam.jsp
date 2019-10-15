@@ -1,5 +1,5 @@
 
-<%@page import="myPackage.classes.Exams"%>
+<%@page import="myPackage.classes.*"%>
 <%@page import="myPackage.classes.Questions"%>
 <%@page import="java.util.ArrayList"%>
 
@@ -70,7 +70,7 @@ if(sec==0){
                        
                        <%
                        //20 questions limit which will be fetched 
-                       ArrayList<Questions> list=pDAO.getQuestions(request.getParameter("coursename"),20);
+                       ArrayList<Questions> list=pDAO.getQuestionsforExam(request.getParameter("coursename"),20);
                        Questions question;
                        %>
                        
@@ -80,8 +80,8 @@ if(sec==0){
                        <%
                        for(int i=0;i<list.size();i++){
                            question=list.get(i);
-                           if(question.getstatus().equals("y"))
-                           {
+                          /*  if(question.getstatus().equals("y"))
+                           { */
                        %>
                        <center>
 					<div class="question-panel">
@@ -109,7 +109,7 @@ if(sec==0){
                        
        
                        <%
-                       }
+                       //}
                        }
                        %>
                        
@@ -162,11 +162,10 @@ if(sec==0){
         <% 
             ArrayList list1=pDAO.getAllCourses();
             
-       
-        
-            for(int i=0;i<list1.size();i=i+2){
+            for(int i=0;i<list1.size();i=i+1){
+            	Courses course =(Courses)list1.get(i);
         %>
-        <option value="<%=list1.get(i)%>"><%=list1.get(i)%></option>
+        <option value="<%=course.getcName()%>"><%=course.getcName()%></option>
             <%
             }
             %>

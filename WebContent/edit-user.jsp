@@ -66,7 +66,7 @@ if(user.getType().endsWith("admin")){
 							<label>First Name</label>
 						</td>
 						<td>
-                                                    <input type="text" name="fname" value="<%=user.getFirstName() %>" class="text" placeholder="First Name">
+                               <input type="text" name="fname" value="<%=user.getFirstName() %>" class="text" placeholder="First Name">
 						</td>
 					</tr>
 					<tr>

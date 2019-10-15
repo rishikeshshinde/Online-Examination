@@ -1,5 +1,6 @@
 
 <%@page import="java.util.ArrayList"%>
+<%@page import = "myPackage.classes.*" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <jsp:useBean id="pDAO" class="myPackage.DatabaseClass" scope="page"/>
 
@@ -23,17 +24,19 @@
             <div class="content-area" >
      <div class="panel form-style-6" style="min-width: 300px;max-width: 390px;">
             <form action="adm-page.jsp">
-                <div class="title">Show All Questions for</div>
+                <div class="title">Selected Questions</div>
                 <br><br>
                 <label>Select Course</label>
                 <input type="hidden" name="pgprt" value="4">
+                <input type="hidden" name="que" value="exam">
                 <select name="coursename" class="text">
         <% 
             ArrayList list1=pDAO.getAllCourses();
             
-            for(int i=0;i<list1.size();i=i+2){
+            for(int i=0;i<list1.size();i=i+1){
+            	Courses course = (Courses)list1.get(i);
         %>
-        <option value="<%=list1.get(i)%>"><%=list1.get(i)%></option>
+        <option value="<%=course.getcName()%>"><%=course.getcName()%></option>
             <%
             }
             %>
@@ -41,6 +44,32 @@
             <input type="submit" value="Show" class="form-button">
             </form>
       </div>
+      
+         <div class="panel form-style-6" style="min-width: 300px;max-width: 390px;">
+            <form action="adm-page.jsp">
+                <div class="title">Question Bank</div>
+                <br><br>
+                <label>Select Course</label>
+                <input type="hidden" name="pgprt" value="4">
+                <input type="hidden" name="que" value="bank">
+                
+                <select name="coursename" class="text">
+        <% 
+            ArrayList list2=pDAO.getAllCourses();
+            
+            for(int i=0;i<list2.size();i=i+1){
+            	Courses course = (Courses)list2.get(i);
+        %>
+        <option value="<%=course.getcName()%>"><%=course.getcName() %></option>
+            <%
+            }
+            %>
+            </select>
+            <input type="submit" value="Show" class="form-button">
+            </form>
+      </div>
+      
+      
         <br>
         <div class="panel form-style-6" style="max-width: 400">     
                <form action="photoprocess" enctype="multipart/form-data" method="post">
@@ -53,9 +82,10 @@
         <% 
             ArrayList list=pDAO.getAllCourses();
             
-            for(int i=0;i<list.size();i=i+2){
+            for(int i=0;i<list.size();i=i+1){
+            	Courses course = (Courses)list2.get(i);
         %>
-        <option value="<%=list.get(i)%>"><%=list.get(i)%></option>
+        <option value="<%=course.getcName()%>"><%=course.getcName()%></option>
             <%
             }
             %>

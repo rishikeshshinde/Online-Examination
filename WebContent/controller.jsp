@@ -67,7 +67,18 @@ if(pDAO.loginValidate(request.getParameter("username").toString(), request.getPa
          
     pDAO.updateStudent(uid,fName,lName,uName,email,pass,rollNo,dept,div,uType);
     response.sendRedirect("dashboard.jsp");
-}else if(request.getParameter("page").toString().equals("courses")){
+}
+else if(request.getParameter("page").toString().equals("course")){
+    
+   String cname =request.getParameter("cname");
+    int tmarks =Integer.parseInt(request.getParameter("tmarks"));
+    String time=request.getParameter("time");
+
+	pDAO.updateCourse(tmarks, time,cname);
+	response.sendRedirect("adm-page.jsp?pgprt=2");
+}
+
+else if(request.getParameter("page").toString().equals("courses")){
     if(request.getParameter("operation").toString().equals("addnew")){
         pDAO.addNewCourse(request.getParameter("coursename"),Integer.parseInt(request.getParameter("totalmarks")),
                 request.getParameter("time"));
@@ -98,10 +109,27 @@ if(pDAO.loginValidate(request.getParameter("username").toString(), request.getPa
         
     }else if(request.getParameter("operation").toString().equals("delQuestion")){
         pDAO.delQuestion(Integer.parseInt(request.getParameter("qid")));
-        response.sendRedirect("adm-page.jsp?pgprt=3");
+        String cname=request.getParameter("coursename");
+       
+        response.sendRedirect("adm-page.jsp?pgprt=4&que=exam&coursename="+cname);
         
     }
-}else if(request.getParameter("page").toString().equals("exams"))
+}
+else if(request.getParameter("page").equals("update"))
+{
+	 if(request.getParameter("operation").equals("delQueFromExam"))
+	 {
+		pDAO.delQuestion(Integer.parseInt(request.getParameter("qid")));
+		 String cname=request.getParameter("c");
+		response.sendRedirect("adm-page.jsp?pgprt=4&que=bank&coursename="+cname);
+	 }
+	 else if(request.getParameter("operation").equals("addQueinExam")){
+		 pDAO.updateStatus(Integer.parseInt(request.getParameter("qid")));
+		 String cname=request.getParameter("c");
+		 response.sendRedirect("adm-page.jsp?pgprt=4&que=bank&coursename="+cname);
+	 }
+}
+else if(request.getParameter("page").toString().equals("exams"))
 {
     if(request.getParameter("operation").toString().equals("startexam"))
     {

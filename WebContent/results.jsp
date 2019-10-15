@@ -65,9 +65,10 @@ else if(session.getAttribute("set").equals("2")){
     	<tr>
         	<th scope="col" class="rounded-company">Date</th>
             <th scope="col" class="rounded-q1">Course</th>
-            <th scope="col" class="rounded-q2">Time</th>
-            <th scope="col" class="rounded-q3">Marks</th>
-            <th scope="col" class="rounded-q3">Status</th>
+            <th scope="col" class="rounded-q1">Time</th>
+            <th scope="col" class="rounded-q1">Marks</th>
+            <th scope="col" class="rounded-q3">Total</th>
+            <th scope="col" class="rounded-q1">Status</th>
             <th scope="col" class="rounded-q4">Action</th>
         </tr>
     </thead>
@@ -87,6 +88,7 @@ else if(session.getAttribute("set").equals("2")){
             <td><%=e.getcName() %></td>
             <td><%=e.getStartTime()+" - "+e.getEndTime()%></td>
             <td><%=e.getObtMarks() %></td>
+            <td><%=pDAO.getTotalMarksByName(e.getcName())%>
             <% if(e.getStatus()!=null){
                 if(e.getStatus().equals("Pass")){%>
                 <td style="background: #00cc33;color:white"><%=e.getStatus()%></td>

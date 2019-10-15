@@ -148,10 +148,13 @@ box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.14);
     
     box-shadow: 0 4px 20px 0px rgba(0, 0, 0, 0.14), 0 7px 10px -5px rgba(0, 188, 212, 0.4);
 }
+
 .delete-btn:hover{
         background: linear-gradient(60deg, #F22E2E, #E01010);
     color: white;
 }
+
+
 .add-btn{
         background: #36b8e9;
         min-width: 70px;

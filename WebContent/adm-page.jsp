@@ -86,6 +86,15 @@
                 <%
                 
             }
+			else if(request.getParameter("pgprt").equals("9")){
+                
+                %>
+            
+                <jsp:include page="edit-course.jsp"/>
+                
+                <%
+                
+            }
             
             %>
             <%

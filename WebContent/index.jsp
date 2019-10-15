@@ -33,15 +33,12 @@ slideit();
 <ul>
 <li><a href="index.jsp">Home</a></li>
 <li><a href="login.jsp">login</a></li>
-<li><a href="contactuspage.html">Contact Us</a></li>
+<li><a href="index.html">Contact Us</a></li>
 </ul>
 </div>
 <div id="d">
 <h2>Welcome to our Website</h2>
-<p>This website will provide you to take exam online and thus saves your time to go far away. There are different kind of
-subjects are provided for exam purpose. Candidate can select any subject for which he/she wants to take exam and then
-he/she can start their exam. System provides the facility to check attempted papers by candidates automatically and shows 
-result after paper submitting.</p>
+<p></p>
 </div>
 <div id="img1">
 <img src="IMG\book1.jpg" width="300" height="250" />
